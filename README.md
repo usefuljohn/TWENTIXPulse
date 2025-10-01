@@ -21,13 +21,27 @@ PoolPulse is a Python application that fetches liquidity pool data from the BitS
 - numpy
 - requests
 
+## Setup
+
+1. Create a virtual environment:
+
+```bash
+python3 -m venv venv
+```
+
+2. Activate the virtual environment:
+
+```bash
+source venv/bin/activate
+```
+
 ## Installation
 
 1. Clone the repository.
 2. Install the required packages:
 
 ```bash
-/venv/bin/pip install matplotlib numpy requests
+pip install -r requirements.txt
 ```
 
 ## Usage
