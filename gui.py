@@ -113,6 +113,7 @@ class PoolPulseApp(tk.Tk):
                         pool_data[pool_id] = balance_b
                         total_twentix += balance_b
                     elif pool_id == "1.19.42": # A: TWENTIX, B: USD
+                        pool_data[pool_id] = balance_a
                         total_twentix += balance_a
                         if balance_a > 0:
                             ratio_42 = balance_b / balance_a
@@ -148,6 +149,31 @@ class PoolPulseApp(tk.Tk):
                         total_twentix += balance_b
                         if rate_b_to_a:
                             other_prices["TWENTIX/RUBLE"] = rate_b_to_a
+                    elif pool_id == "1.19.156": # A: TWENTIX, B: TWENTIX.HUSDMM
+                        pool_data[pool_id] = balance_a
+                        total_twentix += balance_a
+                        if rate_a_to_b:
+                            other_prices["TWENTIX.HUSDMM/TWENTIX"] = rate_a_to_b
+                    elif pool_id == "1.19.467": # A: CNY, B: TWENTIX
+                        pool_data[pool_id] = balance_b
+                        total_twentix += balance_b
+                        if rate_b_to_a:
+                            other_prices["TWENTIX/CNY"] = rate_b_to_a
+                    elif pool_id == "1.19.281": # A: TWENTIX, B: TUSC
+                        pool_data[pool_id] = balance_a
+                        total_twentix += balance_a
+                        if rate_a_to_b:
+                            other_prices["TUSC/TWENTIX"] = rate_a_to_b
+                    elif pool_id == "1.19.249": # A: 1.3.3291, B: XBTSX.STH
+                        pool_data[pool_id] = balance_a
+                        total_twentix += balance_a
+                        if rate_a_to_b:
+                            other_prices["XBTSX.STH/1.3.3291"] = rate_a_to_b
+                    elif pool_id == "1.19.144": # A: 1.3.3291, B: CRUDE.LVRG
+                        pool_data[pool_id] = balance_a
+                        total_twentix += balance_a
+                        if rate_a_to_b:
+                            other_prices["CRUDE.LVRG/1.3.3291"] = rate_a_to_b
                     else: # For other pools, assume A is TWENTIX
                         pool_data[pool_id] = balance_a
                         total_twentix += balance_a
@@ -190,18 +216,24 @@ class PoolPulseApp(tk.Tk):
                 "1.19.273": "Pool 273: VAULTA",
                 "1.19.391": "Pool 391: HONEST.MONEY",
                 "1.19.41": "Pool 41: BTWTY",
+                "1.19.42": "Pool 42: USD",
                 "1.19.219": "Pool 219: GOLDBACK",
                 "1.19.248": "Pool 248: USDC",
-                "1.19.468": "Pool 468: RUBLE"
+                "1.19.468": "Pool 468: RUBLE",
+                "1.19.156": "Pool 156: HUSDMM",
+                "1.19.467": "Pool 467: CNY",
+                "1.19.281": "Pool 281: TUSC",
+                "1.19.249": "Pool 249: XBTSX.STH",
+                "1.19.144": "Pool 144: CRUDE.LVRG"
             }
             
-            chart_pool_data = {k: v for k, v in pool_data.items() if k != "1.19.42"}
+
 
             # Sort pool data by percentage in descending order for the legend
-            sorted_pool_items = sorted(chart_pool_data.items(), key=lambda item: item[1], reverse=True)
+            sorted_pool_items = sorted(pool_data.items(), key=lambda item: item[1], reverse=True)
 
             labels = [pool_names.get(p[0], f"Pool {p[0].split('.')[-1]}") for p in sorted_pool_items]
-            sizes = [float(p[1] / sum(chart_pool_data.values())) * 100 for p in sorted_pool_items]
+            sizes = [float(p[1] / sum(pool_data.values())) * 100 for p in sorted_pool_items]
             
             self.ax.clear()
             

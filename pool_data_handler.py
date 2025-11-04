@@ -23,7 +23,12 @@ precisions = {
     "1.19.219": (5, 5),
     "1.19.248": (5, 6),
     "1.19.41": (5, 5),
-    "1.19.468": (5, 5)
+    "1.19.468": (5, 5),
+    "1.19.156": (5, 5),
+    "1.19.467": (4, 5),
+    "1.19.281": (5, 5),
+    "1.19.249": (5, 6),
+    "1.19.144": (5, 6)
 }
 
 def get_pool_data(pool_id="1.19.507"):
@@ -111,7 +116,7 @@ def calculate_exchange_rate(pool_data, asset_a_precision=4, asset_b_precision=2)
 def main():
     """Main function to get pool data and calculate rates"""
     
-    pool_ids = ["1.19.507", "1.19.451", "1.19.0", "1.19.44", "1.19.273", "1.19.391", "1.19.41", "1.19.219", "1.19.248"]
+    pool_ids = ["1.19.507", "1.19.451", "1.19.0", "1.19.44", "1.19.273", "1.19.391", "1.19.41", "1.19.219", "1.19.248", "1.19.156", "1.19.467", "1.19.281"]
     
     twentix_total = Decimal(0)
     
@@ -159,6 +164,15 @@ def main():
             twentix_total += balance_a
 
         if pool_id == "1.19.248":
+            twentix_total += balance_a
+
+        if pool_id == "1.19.156":
+            twentix_total += balance_a
+
+        if pool_id == "1.19.467":
+            twentix_total += balance_b
+            
+        if pool_id == "1.19.281":
             twentix_total += balance_a
             
         print("-" * 50)
